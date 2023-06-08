@@ -57,6 +57,7 @@ export const deleteCart = async (id) => {
 
 export const updateProductCart = async (id, productId, updatedFields) => {
     try {
+      console.log('productId:', productId); // Imprime el valor de productId
       const cart = await cartModel.findById(id);
       if (!cart) {
         throw new Error('Cart not found');
