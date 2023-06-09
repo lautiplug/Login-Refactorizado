@@ -1,6 +1,7 @@
-import {cartModel} from './models/cart.model.js';
+import mongoose from 'mongoose';
+import { cartModel } from './models/cart.model.js';
 
-export const getCart = async () => {    
+export const getCart = async () => {
     try {
         return await cartModel.find({});
     } catch (error) {
@@ -55,25 +56,54 @@ export const deleteCart = async (id) => {
     }
 }
 
-export const updateProductCart = async (id, productId, updatedFields) => {
+export const updateProductQuantity = async (cartId, productId, quantity) => {
     try {
-      console.log('productId:', productId); // Imprime el valor de productId
-      const cart = await cartModel.findById(id);
+      const cart = await cartModel.findById(cartId);
       if (!cart) {
         throw new Error('Cart not found');
       }
-      
-      const productIndex = cart.carrito.findIndex((product) => product._id === productId);
-      if (productIndex === -1) {
+  
+      const productToUpdate = cart.carrito.find((product) => product._id.toString() === productId.toString());
+      if (!productToUpdate) {
         throw new Error('Product not found in cart');
       }
-      
-      cart.carrito[productIndex] = updatedFields;
-      const updatedCart = await cart.save();
-      
-      return updatedCart;
+  
+      productToUpdate.quantity = quantity;
+  
+      await cart.save();
+  
+      return productToUpdate;
     } catch (error) {
       console.log(error);
       throw error;
     }
   };
+
+/* export const updateProductCart = async (id, productId, updatedFields) => {
+    try {
+      const cart = await cartModel.findById(id);
+      if (!cart) {
+        throw new Error('Cart not found');
+      }
+  
+      const productToUpdate = cart.carrito.find((product) => product._id.toString() === productId);
+      if (!productToUpdate) {
+        throw new Error('Product not found in cart');
+      }
+  
+      console.log('Product before update:', productToUpdate); // Imprime el producto antes de la actualización
+  
+      productToUpdate.title = updatedFields.title;
+      productToUpdate.description = updatedFields.description;
+      productToUpdate.price = updatedFields.price;
+  
+      console.log('Product after update:', productToUpdate); // Imprime el producto después de la actualización
+  
+      await cart.save(); // Guarda los cambios en el carrito
+  
+      return cart; // Devuelve el carrito completo actualizado
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }; */

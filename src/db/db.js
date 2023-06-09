@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const connectionString = 'poner el string de la conexion'
+const connectionString = ''
 
 try {
   await mongoose.connect(connectionString);
