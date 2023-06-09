@@ -23,7 +23,7 @@ GET products // http://localhost:8080/products
 
 GET product by id // http://localhost:8080/products/6483265348d283b1ad84d31c
 
-POST Product // http://localhost:8080/products 
+POST Product // http://localhost:8080/products pegue el JSON en el cuerpo del body
 {
     "title": "Producto agregado NUEVO",
     "description": "Descripción del producto NUEVO",
