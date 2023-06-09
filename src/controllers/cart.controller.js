@@ -58,29 +58,12 @@ export const deleteCartController = async (req, res, next) => {
     }
 }
 
-/* export const updateProductCartController = async (req, res, next) => {
-    try {
-      const { id, productId } = req.params;
-      const { title, description, price } = req.body; // Obtener los campos actualizados del producto
-      const updatedFields = { title, description, price }; // Crear un objeto con los campos actualizados
-        
-      const updatedProduct = await updateProductCartService(id, productId, updatedFields);
-      if (!updatedProduct) {
-        return res.status(404).json({ message: 'Product not found in cart' });
-      }
-  
-      return res.status(200).json({ message: 'Product updated successfully', cart: updatedProduct.carrito });
-    } catch (error) {
-      next(error);
-    }
-  }; */
-
-  export const updateProductQuantityController = async (req, res, next) => {
+export const updateProductQuantityController = async (req, res, next) => {
     try {
       const { cid, pid } = req.params;
-      const { quantity } = req.body; // Obtener la cantidad actualizada desde req.body
+      const { quantity } = req.body;
   
-      const updatedCart = await updateProductQuantityService(cid, pid.toString(), quantity);
+      const updatedCart = await updateProductQuantityService(cid, pid, quantity);
       if (!updatedCart) {
         return res.status(404).json({ message: 'Cart or product not found' });
       }

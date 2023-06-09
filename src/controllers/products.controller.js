@@ -2,7 +2,7 @@ import { getProductByIdService, getProductsService, addProductService, updatePro
 
 export const getProductsController = async (req, res, next) => {
     try {
-        const { page, limit} = req.query;
+        const { page, limit } = req.query;
         const products = await getProductsService(page, limit);
         let statusRes;
         products ? statusRes = 200 : statusRes = 404;
@@ -29,7 +29,11 @@ export const getProductByIdController = async (req, res, next) => {
     try {
         const { id } = req.params;
         const product = await getProductByIdService(id);
-        res.status(200).json(product);
+        if (product) {
+            res.status(200).json(product);
+        } else {
+            res.status(404).json({ message: 'Product not found' });
+        }
     } catch (error) {
         next(error);
     }
@@ -39,7 +43,7 @@ export const addProductController = async (req, res, next) => {
     try {
         const product = req.body;
         const newProduct = await addProductService(product);
-        res.status(201).json(newProduct);
+        res.status(201).json({ message: 'Product added successfully', product: newProduct });
     } catch (error) {
         next(error);
     }
@@ -50,7 +54,11 @@ export const updateProductController = async (req, res, next) => {
         const { id } = req.params;
         const product = req.body;
         const updatedProduct = await updateProductService(id, product);
-        res.status(200).json(updatedProduct);
+        if (updatedProduct) {
+            res.status(200).json({ message: 'Product updated successfully', product: updatedProduct });
+        } else {
+            res.status(404).json({ message: 'Product not found' });
+        }
     } catch (error) {
         next(error);
     }
@@ -60,7 +68,11 @@ export const deleteProductController = async (req, res, next) => {
     try {
         const { id } = req.params;
         const deletedProduct = await deleteProductService(id);
-        res.status(200).json(deletedProduct);
+        if (deletedProduct) {
+            res.status(200).json({ message: 'Product deleted successfully', product: deletedProduct });
+        } else {
+            res.status(404).json({ message: 'Product not found' });
+        }
     } catch (error) {
         next(error);
     }

@@ -27,11 +27,11 @@ export const addProduct = async (product) => {
 
 export const updateProduct = async (id, product) => {
     try {
-        return await ProductModel.findByIdAndUpdate({ _id: id }, product);
+      return await ProductModel.findByIdAndUpdate({ _id: id }, product, { new: true });
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-}
+  };
 
 export const deleteProduct = async (id) => {
     try {

@@ -1,4 +1,4 @@
-import { getCart, getCartById, addProductToCart, deleteProductFromCart, deleteCart, createCart } from "../dao/cart.dao.js";
+import { getCart, getCartById, addProductToCart, deleteProductFromCart, deleteCart, createCart, updateProductQuantity } from "../dao/cart.dao.js";
 import { cartModel } from "../dao/models/cart.model.js";
 
 export const getCartService = async () => {
@@ -49,18 +49,6 @@ export const deleteCartService = async (id) => {
   }
 }
 
-/* export const updateProductCartService = async (id, productId, updatedFields) => {
-  try {
-    const updatedCart = await updateProductCart(id, productId, updatedFields);
-    if (!updatedCart) {
-      throw new Error('Cart not found');
-    }
-    return updatedCart;
-  } catch (error) {
-    throw error;
-  }
-}; */
-
 export const updateProductQuantityService = async (cartId, productId, quantity) => {
   try {
     const cart = await cartModel.findById(cartId);
@@ -68,20 +56,20 @@ export const updateProductQuantityService = async (cartId, productId, quantity) 
       throw new Error('Cart not found');
     }
 
-    const productToUpdate = cart.carrito.find((product) => product._id.toString() === productId);
+    const productToUpdate = cart.carrito.find((product) => product._id.toString() === productId.toString());
     if (!productToUpdate) {
       throw new Error('Product not found in cart');
     }
 
-    console.log('Product before update:', productToUpdate); // Imprime el producto antes de la actualización
+    console.log('Product before update:', productToUpdate);
+    console.log('Quantity:', quantity);
 
-    console.log(updateProductQuantityService)
-    productToUpdate.quantity = quantity; // Actualiza la cantidad del producto
+    const updatedCart = await updateProductQuantity(cartId, productId, quantity);
 
-    console.log('Product after update:', productToUpdate); // Imprime el producto después de la actualización
+    console.log('Product after update:', productToUpdate);
+    console.log('Updated cart:', updatedCart);
 
-    await cart.save(); // Guarda los cambios en el carrito
-    return productToUpdate; // Devuelve el producto actualizado
+    return updatedCart; // Devuelve el carrito actualizado
   } catch (error) {
     console.log(error);
     throw error;
