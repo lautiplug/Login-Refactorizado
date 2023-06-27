@@ -18,3 +18,8 @@ _User sin permisos_
 
 sa@sa.com
 12345
+
+_Register Github_
+
+localhost:8080/views/register-github
+

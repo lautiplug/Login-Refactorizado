@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import UserDao from '../dao/user.dao.js';
-import { logoutUserController } from '../controllers/user.controller.js';
+import { githubResponse, logoutUserController } from '../controllers/user.controller.js';
+import passport from 'passport';
 
 const userDao = new UserDao();
 const router = Router();
@@ -31,6 +32,10 @@ router.post('/login', async (req, res) => {
     console.log(error);
   }
 });
+
+router.get('/register-github', passport.authenticate('github', { scope: ['user:email'] }));
+
+router.get('/profile-github', passport.authenticate('github', { scope: ['user:email'] }), githubResponse);
 
 router.get('/logout', logoutUserController)
 

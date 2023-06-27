@@ -1,9 +1,40 @@
-<h1>LOGIN</h1>
-<form action='/users/login' method='post'>
-  Email: <input type='email' name='email' id='email' />
-  Password: <input type='password' name='password' id='password' />
-  <input type='submit' value='INGRESAR' />
-</form>
+<!DOCTYPE html>
+<html lang="en">
 
-<h2>No tenés cuenta?</h2>
-<button onclick="location.href='/views/register'">Ir a registro</button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/68b69ce558.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css">
+  <title>Login</title>
+</head>
+
+<body>
+  <main class="main-login">
+    <section class="form">
+      <form class="form-action" action="/users/login" method="POST">
+        <div class="title">Welcome to PLUG</div>
+        <div class="input-container ic1">
+          <input id="email" class="input" type="email" name="email" placeholder=" " required />
+          <div class="cut cut-short"></div>
+          <label for="email" class="placeholder">Email</label>
+        </div>
+        <div class="input-container ic2">
+          <input id="password" name="password" class="input" type="password" placeholder=" " required />
+          <div class="cut"></div>
+          <label for="email" class="placeholder">Password<label />
+        </div>
+        <button type="submit" class="submit">Log in</button>
+        <p class="form-or"> Or </p>
+      </form>
+      <button onclick="location.href='/users/register-github'" type="submit" class="submit-github"> Log in with Github
+        <i class="fa-brands fa-github"></i></button>
+      <div class="form-create-acc">
+        <h2 class="form-create-acc-h2">Not on PLUG yet?</h2>
+        <a class="form-create-acc-link" onclick="location.href='/views/register'">Sign up.</a>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

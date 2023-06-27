@@ -2,7 +2,7 @@
 
 Para el correcto funcionamiento de la aplicación deberá instalar las dependencias que están a continuación
 
-npm install express mongoose mongoose-paginate-v2 morgan
+npm install express mongoose mongoose-paginate-v2 morgan bcrypt passport passport-local passport-github2
 
 copie y pegue esa linea y estará listo para ser iniciado
 

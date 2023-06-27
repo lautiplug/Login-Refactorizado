@@ -1,10 +1,59 @@
-<h1>REGISTRO</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<form action='/users/register' method="post">
-  FirstName: <input type='text' name='first_name' id='first_name' required/>
-  LastName: <input type='text' name='last_name' id='last_name' required/>
-  Email: <input type='email' name='email' id='email' required/>
-  Age: <input type='number' name='age' id='age' required/>
-  Password: <input type='password' name='password' id='password' required/>
-  <button type="submit">Crear cuenta</button>
-</form>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/68b69ce558.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+  <main class="main-register">
+    <section class="form">
+      <form class="form-action" action="/users/register" method="POST">
+        <div class="title">Create an Account</div>
+        <div class="subtitle">It's easy and quickly.</div>
+        <section class="form-names">
+          <div class="input-container ic1">
+            <input id="first_name" class="input" type="text" name="first_name" placeholder=" " required />
+            <div class="cut cut-short"></div>
+            <label for="email" class="placeholder">Name</label>
+          </div>
+          <div class="input-container ic1">
+            <input id="last_name" class="input" type="text" name="last_name" placeholder=" " required />
+            <div class="cut "></div>
+            <label for="email" class="placeholder">Last Name</label>
+          </div>
+        </section>
+        <section class="form-names">
+          <div class="input-container ic1">
+            <input id="email" class="input" type="email" name="email" placeholder=" " required />
+            <div class="cut cut-short"></div>
+            <label for="email" class="placeholder">Email</label>
+          </div>
+          <div class="input-container ic1">
+            <input id="age" class="input" type="number" name="age" placeholder=" " required />
+            <div class="cut cut-short"></div>
+            <label for="email" class="placeholder">Age</label>
+          </div>
+        </section>
+        <div class="input-container ic2">
+          <input id="password" name="password" class="input" type="password" placeholder=" " required />
+          <div class="cut"></div>
+          <label for="email" class="placeholder">Password<label />
+        </div>
+        <button type="submit" class="submit">Sign up</button>
+      <p class="form-or"> Or </p>
+      </form>
+      <button onclick="location.href='/users/register-github'" type="submit" class="submit-github"> Sign up with Github
+        <i class="fa-brands fa-github"></i></button>
+      <div class="form-create-acc">
+        <h2 class="form-create-acc-h2">Have an account?</h2>
+        <a class="form-create-acc-link" onclick="location.href='/views/'">Log in.</a>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
