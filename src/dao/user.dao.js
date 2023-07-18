@@ -1,3 +1,4 @@
+import { cartModel } from "./models/cart.model.js";
 import { userModel } from "./models/user.model.js";
 
 export default class UserDao {
@@ -7,6 +8,8 @@ export default class UserDao {
 
       const userExist = await userModel.find({ email })
       if (userExist.length == 0) {
+        const newCart = await cartModel.create({}); // Crear un nuevo documento de carrito
+        user.cart = newCart._id; // Asignar el ID del carrito al campo cart del usuario
         if (email == 'adminCoder@coder.com') {
           const newUser = await userModel.create({ ...user, role: 'admin' })
           return newUser

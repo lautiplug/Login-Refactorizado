@@ -1,21 +1,22 @@
+// Dependencias
+import express from 'express'
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
+import mongoStore from 'connect-mongo'
+import passport from 'passport';
+import exphbs from 'express-handlebars';
+import { __dirname } from './utils.js'
+import handlebars from 'handlebars';
+import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access';
+import 'dotenv/config'
+
+// archivos locales
 import './db/db.js'
 import './passport/github-passport.js'
 import './passport/strategies.js';
 import './db/db.js';
-import express from 'express'
-import cookieParser from 'cookie-parser'
-import session from 'express-session'
-import { __dirname } from './utils.js'
-import viewsRouter from './routes/userViews.router.js'
-import cartRouter from './routes/cart.router.js'
-import productsRouter from './routes/products.router.js'
-import usersRouter from './routes/users.router.js'
-import mongoStore from 'connect-mongo'
+import { viewsRouter, cartRouter, productsRouter, usersRouter } from './routes/index.js';
 import { errorHandler } from './middlewares/errorHandler.js'
-import passport from 'passport';
-import exphbs from 'express-handlebars';
-import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access';
-import handlebars from 'handlebars';
 
 const app = express();
 
@@ -45,7 +46,7 @@ app.use(
       maxAge: 10000
     },
     store: new mongoStore({
-      mongoUrl: 'mongodb+srv://lautitheplug-admin:CsEoE72L0iH0zVmP@lautiplug.3ka4qbc.mongodb.net/coderhouse?retryWrites=true&w=majority',
+      mongoUrl: process.env.MONGO_ATLAS_URL,
       ttl: 10,
     }),
   })
@@ -60,7 +61,7 @@ app.use('/views', viewsRouter);
 app.use('/products', productsRouter);
 app.use('/cart', cartRouter);
 
-const PORT = 8080;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`🚀 Server listening on port ${PORT}`));
 
 export default app;
