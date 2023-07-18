@@ -3,11 +3,11 @@
 
 _Inicio_ 
 
-localhost:8080/views
+localhost:PORT/views
 
 _Profile_
 
-localhost:8080/views/profile
+localhost:PORT/views/profile
 
 _User ADMIN_
 
@@ -21,5 +21,5 @@ sa@sa.com
 
 _Register Github_
 
-localhost:8080/views/register-github
+localhost:PORT/views/register-github
 
